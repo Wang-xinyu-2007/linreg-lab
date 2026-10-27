@@ -97,4 +97,11 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except NotImplementedError as exc:
+        # 关卡还没写完：别甩一堆 traceback 吓人
+        print(f"\n还有关卡没做完：{exc}", file=sys.stderr)
+        print("先跑 python check.py 看看进度，"
+              "或者用 python demo.py --solutions 直接看参考答案的效果。", file=sys.stderr)
+        raise SystemExit(1)
