@@ -39,9 +39,13 @@ def main() -> int:
     if "--solutions" in sys.argv:
         os.environ["LINREG_SOLUTIONS"] = "1"
 
-    normal = linreg_lab.load("03_normal_equation")
-    descent = linreg_lab.load("04_gradient_descent")
-    multi = linreg_lab.load("05_multi_feature")
+    try:
+        normal = linreg_lab.load("03_normal_equation")
+        descent = linreg_lab.load("04_gradient_descent")
+        multi = linreg_lab.load("05_multi_feature")
+    except FileNotFoundError as exc:
+        print(exc, file=sys.stderr)
+        return 2
 
     # ---------------- 一元回归 ----------------
     rng = np.random.default_rng(2026)
